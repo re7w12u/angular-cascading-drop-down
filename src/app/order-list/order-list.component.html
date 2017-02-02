@@ -1,0 +1,5 @@
+<h2>Orders</h2>
+
+<p *ngFor="let o of orders">
+  <a [routerLink]="['/order',o.Id]">{{o.Numero}}</a>
+</p>

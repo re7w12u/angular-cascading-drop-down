@@ -1,0 +1,48 @@
+<div class="container">
+
+<div>
+  <label for="numero">Numéro</label>
+  <input type="text" [(ngModel)]="order.Numero" id="numero" name="numero" />
+</div>
+
+<div>Company</div>
+    <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle" type="button" id="companyDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            {{order.Company.Name}}
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="companyDropdown">
+            <li *ngFor="let c of companies">
+                <a (click)="companyChanged(c.Id)">{{c.Name}}</a>
+            </li>
+        </ul>
+    </div>
+
+
+  <div>Prestataire</div>
+ <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle" type="button" id="contractorDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            {{order.Contrator.Name}}
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="contractorDropdown">
+            <li *ngFor="let c of filteredContractors">
+                <span>{{c.Name}}</span>
+            </li>
+        </ul>
+    </div>
+
+
+  <div>Commerical</div>
+ <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle" type="button" id="salesmanDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            {{order.Salesman.Name}}
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="salesmanDropdown">
+            <li *ngFor="let c of filteredSalesmans">
+                <span>{{c.Name}}</span>
+            </li>
+        </ul>
+    </div>
+</div>
