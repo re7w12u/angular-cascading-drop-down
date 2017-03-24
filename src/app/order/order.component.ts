@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute} from '@angular/router';
-
+import { Location  }from '@angular/common';
 import { Order } from '../models/order';
 import { Company } from '../models/company';
 import { Contrator, Salesman } from '../models/person';
@@ -29,7 +29,8 @@ export class OrderComponent implements OnInit {
               private salesmanService:SalesmanService,
               private companyService:CompanyService,
               private orderService:OrderService,
-              private route:ActivatedRoute) { }
+              private route:ActivatedRoute,
+              private location:Location) { }
 
   ngOnInit() {
     this.companies = this.companyService.get();
@@ -44,20 +45,24 @@ export class OrderComponent implements OnInit {
     this.order.Company = this.companies.find(x => x.Id == this.order.CompanyId);
     this.order.Contrator = this.contractors.find(x => x.Id == this.order.ContratorId);
     this.order.Salesman = this.salesmans.find(x => x.Id == this.order.SalesmanId);
+    console.log(this.order);
   }
 
   filter(id:number){
     this.filteredContractors = this.contractors.filter(x => x.CompanyId === id);
-    this.order.Contrator = this.filteredContractors[0];
-    this.order.ContratorId = this.filteredContractors[0].Id;
+    this.order.Contrator = this.filteredContractors[this.filteredContractors.length - 1];
+    this.order.ContratorId = this.order.Contrator.Id;
 
     this.filteredSalesmans = this.salesmans.filter(x => x.CompanyId === id);
-    this.order.Salesman = this.filteredSalesmans[0];
-    this.order.SalesmanId = this.filteredSalesmans[0].Id;
+    this.order.Salesman = this.filteredSalesmans[this.filteredSalesmans.length - 1];
+    this.order.SalesmanId = this.order.Salesman.Id;
   }
 
   companyChanged($event){  
     this.filter($event);
   }
 
+  goBack(){
+    this.location.back();
+  }
 }

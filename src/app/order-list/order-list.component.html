@@ -1,5 +1,8 @@
 <h2>Orders</h2>
-
-<p *ngFor="let o of orders">
-  <a [routerLink]="['/order',o.Id]">{{o.Numero}}</a>
-</p>
+<div class="container">
+  <div class="panel">
+    <p *ngFor="let o of orders">
+      <button class="btn btn-default" [routerLink]="['/order',o.Id]">{{o.Numero}}</button>
+    </p>
+  </div>
+</div>
